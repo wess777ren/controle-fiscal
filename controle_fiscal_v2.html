@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Controle Fiscal — V2</title>
+<style>
+:root{--bg:#f4f6f8;--card:#fff;--ink:#1f2933;--muted:#77808c;--line:#e3e7eb;--nav:#202a36;--nav2:#344354;--accent:#2b4058;--green:#198754;--yellow:#b7791f;--red:#c0392b;--blue:#356ae6}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink)}button,input,select{font:inherit}.app{display:flex;min-height:100vh}.side{width:240px;background:var(--nav);color:#fff;padding:23px 15px;position:fixed;inset:0 auto 0 0}.brand{font-weight:750;font-size:20px;margin:0 12px 4px}.version{color:#9ba7b5;font-size:11px;margin:0 12px 28px}.nav{display:grid;gap:5px}.nav button{border:0;background:transparent;color:#cbd3dc;text-align:left;padding:12px 13px;border-radius:8px;cursor:pointer}.nav button.active,.nav button:hover{background:var(--nav2);color:#fff}.main{margin-left:240px;flex:1;padding:28px;max-width:1500px}.top{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:22px}.title{font-size:27px;font-weight:750}.sub{font-size:13px;color:var(--muted);margin-top:5px}.actions{display:flex;gap:8px;align-items:center}.select,.input{border:1px solid var(--line);background:#fff;border-radius:8px;padding:10px 12px;outline:none}.btn{border:0;border-radius:8px;padding:10px 14px;cursor:pointer;font-weight:650}.primary{background:var(--accent);color:#fff}.light{background:#fff;border:1px solid var(--line)}.cards{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:20px}.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:17px}.label{font-size:12px;color:var(--muted)}.num{font-size:26px;font-weight:750;margin-top:7px}.green{color:var(--green)}.yellow{color:var(--yellow)}.red{color:var(--red)}.blue{color:var(--blue)}.panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:19px;margin-bottom:18px}.panel h2{font-size:16px;margin:0 0 15px}.toolbar{display:flex;gap:9px;margin-bottom:14px;flex-wrap:wrap}.toolbar .input{flex:1;min-width:220px}.table{width:100%;border-collapse:collapse}.table th,.table td{padding:12px 9px;text-align:left;border-top:1px solid var(--line);font-size:13px}.table th{color:var(--muted);font-weight:650}.badge,.tag{display:inline-block;border-radius:999px;padding:5px 8px;font-size:11px;font-weight:700}.ok{background:#e7f6ed;color:#167344}.warn{background:#fff3d6;color:#956214}.danger{background:#fde8e8;color:#b42323}.neutral{background:#edf0f3;color:#59636e}.tag{border-radius:6px;background:#eef2f6;color:#46515f}.grid2{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.sectionTitle{font-size:13px;font-weight:750;margin:4px 0 10px}.checkgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.check{border:1px solid var(--line);border-radius:8px;padding:9px;background:#fafbfc;font-size:13px}.check input{margin-right:8px}.progress{height:8px;background:#e9edf1;border-radius:99px;overflow:hidden}.progress span{display:block;height:100%;background:#4d6f96;width:76%}.empty{padding:28px;text-align:center;color:var(--muted)}.modal{position:fixed;inset:0;background:#0006;display:none;align-items:center;justify-content:center;padding:20px;z-index:5}.modal.show{display:flex}.modalbox{background:#fff;width:min(900px,100%);max-height:90vh;overflow:auto;border-radius:14px;padding:23px}.modalhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.close{border:0;background:#eef1f4;border-radius:8px;padding:7px 10px;cursor:pointer}.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.field{display:grid;gap:6px}.field label{font-size:12px;font-weight:650;color:#59636e}.full{grid-column:1/-1}.checks{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.small{font-size:11px;color:var(--muted)}.toast{position:fixed;right:22px;bottom:22px;background:#202a36;color:#fff;padding:12px 15px;border-radius:9px;display:none;z-index:9}.toast.show{display:block}
+@media(max-width:1100px){.cards{grid-template-columns:repeat(3,1fr)}.grid2{grid-template-columns:1fr}.side{width:205px}.main{margin-left:205px}}
+@media(max-width:760px){.side{position:static;width:100%;height:auto}.app{display:block}.main{margin-left:0}.cards{grid-template-columns:repeat(2,1fr)}.grid3,.formgrid{grid-template-columns:1fr}.checks{grid-template-columns:repeat(2,1fr)}.top{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+  <div class="brand">Controle Fiscal</div><div class="version">Painel fiscal • V2</div>
+  <div class="nav">
+    <button class="active" onclick="show('dashboard',this)">⌂ Dashboard</button>
+    <button onclick="show('empresas',this)">▣ Empresas</button>
+    <button onclick="show('competencias',this)">◷ Competências</button>
+    <button onclick="show('impostos',this)">◈ Impostos</button>
+    <button onclick="show('notas',this)">▤ Notas fiscais</button>
+    <button onclick="show('obrigacoes',this)">✓ Obrigações</button>
+    <button onclick="show('config',this)">⚙ Configurações</button>
+  </div>
+</aside>
+<main class="main" id="content"></main>
+</div>
+<div class="modal" id="modal"><div class="modalbox" id="modalbox"></div></div>
+<div class="toast" id="toast">Salvo.</div>
+
+<script>
+let empresas=[
+ {id:1,nome:"Empresa Exemplo A",fantasia:"Exemplo A",cnpj:"12.345.678/0001-00",regime:"Simples Nacional",uf:"SP",municipio:"São Paulo",ie:"—",im:"—",pend:0,status:"Em dia",
+  impostos:["ISS","IBS","CBS"],docs:["NF-e de entrada","NF-e de saída","Serviços tomados","Serviços prestados","PGDAS-D"]},
+ {id:2,nome:"Empresa Exemplo B",fantasia:"Exemplo B",cnpj:"23.456.789/0001-11",regime:"Lucro Presumido",uf:"SP",municipio:"São Paulo",ie:"123.456.789.000",im:"987654",pend:2,status:"Atenção",
+  impostos:["ISS","ICMS","PIS","COFINS","IRPJ","CSLL","IBS","CBS"],docs:["NF-e de entrada","NF-e de saída","Serviços tomados","Serviços prestados","DCTFWeb","EFD-Contribuições"]},
+ {id:3,nome:"Empresa Exemplo C",fantasia:"Exemplo C",cnpj:"34.567.890/0001-22",regime:"Simples Nacional",uf:"SP",municipio:"São Paulo",ie:"—",im:"—",pend:1,status:"Pendente",
+  impostos:["ISS","ICMS","IBS","CBS"],docs:["NF-e de entrada","NF-e de saída","PGDAS-D"]}
+];
+const allTaxes=["ISS","ICMS","IPI","PIS","COFINS","IRPJ","CSLL","INSS/CP","IBS","CBS","IS","DIFAL","ICMS-ST"];
+const allDocs=["NF-e de entrada","NF-e de saída","NFC-e","Serviços tomados","Serviços prestados","PGDAS-D","DCTFWeb","EFD-Contribuições","EFD ICMS/IPI","DeRE","Outras obrigações"];
+let monthly={
+ "1":{notas:{entrada:23,saida:17,tomados:4,prestados:8},taxes:{ISS:["Conferido","R$ 225,00"],IBS:["Acompanhar","—"],CBS:["Acompanhar","—"]}},
+ "2":{notas:{entrada:32,saida:21,tomados:7,prestados:14},taxes:{ISS:["Conferido","R$ 225,00"],ICMS:["Conferido","R$ 1.536,00"],CSLL:["Pendente","R$ 430,00"],IBS:["Acompanhar","—"],CBS:["Acompanhar","—"]}},
+ "3":{notas:{entrada:8,saida:11,tomados:2,prestados:3},taxes:{ISS:["Pendente","—"],IBS:["Acompanhar","—"],CBS:["Acompanhar","—"]}}
+};
+
+function toast(t){let x=document.getElementById("toast");x.textContent=t;x.classList.add("show");setTimeout(()=>x.classList.remove("show"),1800)}
+function openModal(title,body,footer=""){document.getElementById("modalbox").innerHTML=`<div class="modalhead"><h2 style="margin:0">${title}</h2><button class="close" onclick="closeModal()">✕</button></div>${body}${footer}`;document.getElementById("modal").classList.add("show")}
+function closeModal(){document.getElementById("modal").classList.remove("show")}
+
+function statusBadge(s){return `<span class="badge ${s==="Em dia"||s==="Conferido"?"ok":s==="Atenção"||s==="Pendente"?"warn":"neutral"}">${s}</span>`}
+function dashboard(){
+ let total=empresas.length, ok=empresas.filter(e=>e.pend===0).length, pend=empresas.reduce((a,e)=>a+e.pend,0);
+ content.innerHTML=`<div class="top"><div><div class="title">Visão geral</div><div class="sub">Controle fiscal da competência de Agosto/2026</div></div><div class="actions"><select class="select"><option>Agosto/2026</option><option>Julho/2026</option><option>Setembro/2026</option></select><button class="btn primary" onclick="generate()">Gerar competência</button></div></div>
+ <div class="cards"><div class="card"><div class="label">Empresas</div><div class="num">${total}</div></div><div class="card"><div class="label">Em dia</div><div class="num green">${ok}</div></div><div class="card"><div class="label">Com atenção</div><div class="num yellow">${total-ok}</div></div><div class="card"><div class="label">Pendências</div><div class="num red">${pend}</div></div><div class="card"><div class="label">Impostos monitorados</div><div class="num blue">${new Set(empresas.flatMap(e=>e.impostos)).size}</div></div></div>
+ <div class="grid2"><div class="panel"><h2>Status das empresas</h2>${companyTable()}</div>
+ <div class="panel"><h2>Resumo fiscal</h2><div class="sectionTitle">Competência processada</div><div class="progress"><span></span></div><p class="small" style="margin-top:8px">76% das verificações concluídas.</p><div class="grid3"><div><div class="label">Entradas</div><b>63</b></div><div><div class="label">Saídas</div><b>49</b></div><div><div class="label">Serviços</div><b>38</b></div></div></div></div>`;
+}
+function companyTable(){
+return `<table class="table"><thead><tr><th>Empresa</th><th>Regime</th><th>Impostos</th><th>Pend.</th><th>Status</th></tr></thead><tbody>${empresas.map(e=>`<tr><td><b>${e.nome}</b><div class="small">${e.cnpj}</div></td><td><span class="tag">${e.regime}</span></td><td>${e.impostos.length}</td><td>${e.pend}</td><td>${statusBadge(e.status)}</td></tr>`).join("")}</tbody></table>`;
+}
+
+function empresasPage(){
+ content.innerHTML=`<div class="top"><div><div class="title">Empresas</div><div class="sub">Cadastro, regime tributário, impostos e obrigações por empresa.</div></div><button class="btn primary" onclick="newCompany()">+ Nova empresa</button></div>
+ <div class="panel"><div class="toolbar"><input class="input" id="search" placeholder="Buscar por razão social, fantasia ou CNPJ..." oninput="filterCompanies()"><select class="select" id="regFilter" onchange="filterCompanies()"><option value="">Todos os regimes</option><option>Simples Nacional</option><option>Lucro Presumido</option><option>Lucro Real</option></select></div><div id="companyList">${companyTable()}</div></div>`;
+}
+function filterCompanies(){
+ let q=document.getElementById("search").value.toLowerCase(), r=document.getElementById("regFilter").value;
+ let list=empresas.filter(e=>(e.nome+e.fantasia+e.cnpj).toLowerCase().includes(q)&&(!r||e.regime===r));
+ document.getElementById("companyList").innerHTML=list.length?`<table class="table"><thead><tr><th>Empresa</th><th>CNPJ</th><th>Regime</th><th>Impostos</th><th>Ação</th></tr></thead><tbody>${list.map(e=>`<tr><td><b>${e.nome}</b></td><td>${e.cnpj}</td><td><span class="tag">${e.regime}</span></td><td>${e.impostos.map(x=>`<span class="tag">${x}</span>`).join(" ")}</td><td><button class="btn light" onclick="editCompany(${e.id})">Abrir</button></td></tr>`).join("")}</tbody></table>`:`<div class="empty">Nenhuma empresa encontrada.</div>`;
+}
+function companyForm(e){
+ let isNew=!e;
+ e=e||{nome:"",fantasia:"",cnpj:"",regime:"Simples Nacional",uf:"SP",municipio:"",ie:"",im:"",impostos:[],docs:[]};
+ let taxes=allTaxes.map(x=>`<label class="check"><input type="checkbox" name="tax" value="${x}" ${e.impostos.includes(x)?"checked":""}>${x}</label>`).join("");
+ let docs=allDocs.map(x=>`<label class="check"><input type="checkbox" name="doc" value="${x}" ${e.docs.includes(x)?"checked":""}>${x}</label>`).join("");
+ openModal(isNew?"Nova empresa":"Editar empresa",`<div class="formgrid">
+ <div class="field"><label>Razão Social</label><input class="input" id="f_nome" value="${e.nome}"></div>
+ <div class="field"><label>Nome Fantasia</label><input class="input" id="f_fantasia" value="${e.fantasia}"></div>
+ <div class="field"><label>CNPJ</label><input class="input" id="f_cnpj" value="${e.cnpj}"></div>
+ <div class="field"><label>Regime tributário</label><select class="select" id="f_regime"><option ${e.regime==="Simples Nacional"?"selected":""}>Simples Nacional</option><option ${e.regime==="Lucro Presumido"?"selected":""}>Lucro Presumido</option><option ${e.regime==="Lucro Real"?"selected":""}>Lucro Real</option></select></div>
+ <div class="field"><label>UF</label><input class="input" id="f_uf" value="${e.uf}"></div><div class="field"><label>Município</label><input class="input" id="f_municipio" value="${e.municipio}"></div>
+ <div class="field"><label>Inscrição Estadual</label><input class="input" id="f_ie" value="${e.ie}"></div><div class="field"><label>Inscrição Municipal</label><input class="input" id="f_im" value="${e.im}"></div>
+ <div class="full"><div class="sectionTitle">Impostos monitorados</div><div class="checks">${taxes}</div></div>
+ <div class="full"><div class="sectionTitle">Documentos e obrigações</div><div class="checks">${docs}</div></div>
+ </div>`,`<div style="display:flex;justify-content:flex-end;gap:8px;margin-top:20px"><button class="btn light" onclick="closeModal()">Cancelar</button><button class="btn primary" onclick="saveCompany(${isNew?"null":e.id})">Salvar empresa</button></div>`);
+}
+function newCompany(){companyForm(null)}
+function editCompany(id){companyForm(empresas.find(e=>e.id===id))}
+function saveCompany(id){
+ let obj={id:id||Date.now(),nome:f_nome.value,fantasia:f_fantasia.value,cnpj:f_cnpj.value,regime:f_regime.value,uf:f_uf.value,municipio:f_municipio.value,ie:f_ie.value,im:f_im.value,impostos:[...document.querySelectorAll('input[name=tax]:checked')].map(x=>x.value),docs:[...document.querySelectorAll('input[name=doc]:checked')].map(x=>x.value),pend:0,status:"Em dia"};
+ if(!obj.nome){toast("Informe a razão social.");return}
+ if(id){let i=empresas.findIndex(e=>e.id===id);obj.pend=empresas[i].pend;obj.status=empresas[i].status;empresas[i]=obj}else empresas.push(obj);
+ closeModal();empresasPage();toast("Empresa salva com sucesso.");
+}
+
+function competencias(){
+ let e=empresas[1], m=monthly[e.id]||{notas:{entrada:0,saida:0,tomados:0,prestados:0},taxes:{}};
+ let taxRows=e.impostos.map(t=>{let v=m.taxes[t]||["Não lançado","—"];return `<tr><td><b>${t}</b></td><td><input class="input" style="width:130px" value="${v[1]}" onchange="setTax('${t}',this.value)"></td><td>${statusBadge(v[0])}</td><td><button class="btn light" onclick="editTax('${t}')">Editar</button></td></tr>`}).join("");
+ content.innerHTML=`<div class="top"><div><div class="title">Competência mensal</div><div class="sub">Agosto/2026 • ${e.nome}</div></div><div class="actions"><select class="select"><option>${e.nome}</option>${empresas.filter(x=>x.id!==e.id).map(x=>`<option>${x.nome}</option>`).join("")}</select><button class="btn primary" onclick="toast('Competência confirmada.')">✓ Confirmar competência</button></div></div>
+ <div class="grid2"><div class="panel"><h2>Documentos fiscais</h2><div class="grid2" style="grid-template-columns:1fr 1fr">${[['entrada','NF-e de entrada'],['saida','NF-e de saída'],['tomados','Serviços tomados'],['prestados','Serviços prestados']].map(a=>`<div class="card"><div class="label">${a[1]}</div><div class="num">${m.notas[a[0]]}</div><button class="btn light" style="margin-top:10px" onclick="editNotes('${a[0]}')">Editar</button></div>`).join("")}</div></div>
+ <div class="panel"><h2>Progresso da competência</h2><div class="progress"><span style="width:72%"></span></div><p class="small">72% concluído</p><p>${statusBadge("Atenção")} Existem itens para revisar antes de fechar o mês.</p></div></div>
+ <div class="panel"><h2>Impostos da empresa</h2><table class="table"><thead><tr><th>Imposto</th><th>Valor/apuração</th><th>Status</th><th></th></tr></thead><tbody>${taxRows}</tbody></table><button class="btn light" style="margin-top:12px" onclick="addTax()">+ Adicionar imposto nesta competência</button></div>`;
+}
+function setTax(t,v){let e=empresas[1];monthly[e.id]??={notas:{},taxes:{}};monthly[e.id].taxes[t]=[monthly[e.id].taxes[t]?.[0]||"Não lançado",v];toast("Valor atualizado.")}
+function editTax(t){openModal("Editar imposto — "+t,`<div class="formgrid"><div class="field"><label>Status</label><select class="select" id="taxStatus"><option>Conferido</option><option>Pendente</option><option>Acompanhar</option><option>Não se aplica</option></select></div><div class="field"><label>Valor / apuração</label><input class="input" id="taxValue" placeholder="R$ 0,00"></div><div class="field full"><label>Observação</label><input class="input" id="taxObs" placeholder="Ex.: houve movimento, retenção, diferença..."></div></div>`,`<div style="display:flex;justify-content:flex-end;margin-top:18px"><button class="btn primary" onclick="closeModal();toast('Imposto atualizado.')">Salvar</button></div>`)}
+function addTax(){openModal("Adicionar imposto à competência",`<div class="field"><label>Imposto</label><select class="select" id="newTax">${allTaxes.map(x=>`<option>${x}</option>`).join("")}</select></div>`,`<div style="display:flex;justify-content:flex-end;margin-top:18px"><button class="btn primary" onclick="closeModal();toast('Imposto adicionado à competência.')">Adicionar</button></div>`)}
+function editNotes(k){openModal("Editar movimentação",`<div class="formgrid"><div class="field"><label>Quantidade de documentos</label><input class="input" id="noteQty" type="number" value="${monthly[2]?.notas?.[k]||0}"></div><div class="field"><label>Status</label><select class="select"><option>Conferido</option><option>Pendente</option><option>Sem movimento</option></select></div></div>`,`<div style="display:flex;justify-content:flex-end;margin-top:18px"><button class="btn primary" onclick="closeModal();toast('Movimentação atualizada.')">Salvar</button></div>`)}
+
+function impostos(){
+ content.innerHTML=`<div class="top"><div><div class="title">Impostos</div><div class="sub">Catálogo fiscal para configurar por empresa e acompanhar por competência.</div></div><button class="btn primary" onclick="addTax()">+ Adicionar imposto</button></div>
+ <div class="panel"><table class="table"><thead><tr><th>Tributo</th><th>Esfera</th><th>Grupo</th><th>Uso no sistema</th></tr></thead><tbody>
+ ${[['ISS','Municipal','Consumo','Serviços'],['ICMS','Estadual','Consumo','Mercadorias'],['IPI','Federal','Consumo','Industrialização'],['PIS','Federal','Contribuições','Transição'],['COFINS','Federal','Contribuições','Transição'],['IRPJ','Federal','Renda','Apuração'],['CSLL','Federal','Renda','Apuração'],['INSS/CP','Federal','Previdenciário','Contribuição'],['IBS','Estadual/Municipal','Reforma Tributária','Novo modelo'],['CBS','Federal','Reforma Tributária','Novo modelo'],['IS','Federal','Reforma Tributária','Imposto Seletivo'],['DIFAL','Estadual','ICMS','Operações interestaduais'],['ICMS-ST','Estadual','ICMS','Substituição tributária']].map(x=>`<tr><td><b>${x[0]}</b></td><td>${x[1]}</td><td><span class="tag">${x[2]}</span></td><td>${x[3]}</td></tr>`).join("")}</tbody></table></div>
+ <div class="panel"><h2>Reforma Tributária — controle de transição</h2><p class="sub">O sistema trata IBS e CBS como itens configuráveis, sem presumir que todas as empresas terão a mesma obrigação. Em 2026, IBS/CBS estão no período de teste e existem regras específicas de cumprimento das obrigações acessórias. </p><div class="grid3"><div class="card"><div class="label">IBS</div><div class="num blue">0,1%</div><div class="small">referência de 2026</div></div><div class="card"><div class="label">CBS</div><div class="num blue">0,9%</div><div class="small">referência de 2026</div></div><div class="card"><div class="label">Ano</div><div class="num">2026</div><div class="small">fase de teste</div></div></div></div>`;
+}
+function notas(){
+ content.innerHTML=`<div class="top"><div><div class="title">Notas fiscais</div><div class="sub">Controle de entradas, saídas, serviços tomados e prestados.</div></div><select class="select"><option>Agosto/2026</option></select></div>
+ <div class="cards"><div class="card"><div class="label">NF-e entradas</div><div class="num">63</div></div><div class="card"><div class="label">NF-e saídas</div><div class="num">49</div></div><div class="card"><div class="label">Serviços tomados</div><div class="num">13</div></div><div class="card"><div class="label">Serviços prestados</div><div class="num">25</div></div><div class="card"><div class="label">A conferir</div><div class="num yellow">4</div></div></div>
+ <div class="panel"><table class="table"><thead><tr><th>Empresa</th><th>Entradas</th><th>Saídas</th><th>Tomados</th><th>Prestados</th><th>Status</th></tr></thead><tbody>${empresas.map(e=>{let m=monthly[e.id]?.notas||{};return `<tr><td><b>${e.nome}</b></td><td>${m.entrada||0}</td><td>${m.saida||0}</td><td>${m.tomados||0}</td><td>${m.prestados||0}</td><td>${statusBadge(e.pend===0?"Conferido":"Pendente")}</td></tr>`}).join("")}</tbody></table></div>`;
+}
+function obrigacoes(){
+ content.innerHTML=`<div class="top"><div><div class="title">Obrigações</div><div class="sub">Obrigações acessórias e rotinas que podem ser vinculadas individualmente.</div></div><button class="btn primary" onclick="toast('Função de nova obrigação preparada para a próxima etapa.')">+ Nova obrigação</button></div>
+ <div class="panel"><table class="table"><thead><tr><th>Obrigação</th><th>Categoria</th><th>Configuração</th></tr></thead><tbody>${allDocs.map(x=>`<tr><td><b>${x}</b></td><td>${x.includes("NF")||x.includes("Serviços")?"Documentos fiscais":"Declaração / rotina"}</td><td><span class="tag">Configurável por empresa</span></td></tr>`).join("")}</tbody></table></div>`;
+}
+function config(){
+ content.innerHTML=`<div class="top"><div><div class="title">Configurações</div><div class="sub">Regras para geração das competências.</div></div></div>
+ <div class="panel"><h2>Geração automática mensal</h2><p class="sub">Ao gerar uma competência, o sistema usa o regime, impostos e obrigações marcados no cadastro de cada empresa. Você poderá alterar o mês sem alterar o cadastro permanente.</p><button class="btn primary" onclick="generate()">Gerar competência de Agosto/2026</button></div>
+ <div class="panel"><h2>Estados de uma obrigação</h2><div class="grid3"><div class="check">🟢 Conferido</div><div class="check">🟡 Pendente</div><div class="check">⚪ Não se aplica</div></div></div>`;
+}
+function generate(){toast("Competência gerada com base nas configurações das empresas.")}
+function show(page,btn){document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');({dashboard,empresas:empresasPage,competencias,impostos,notas,obrigacoes,config})[page]();}
+dashboard();
+</script>
+</body>
+</html>
